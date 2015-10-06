@@ -2,6 +2,8 @@
 
 okay so this is as ******** as possible
 
+YOU NEED PYTHON 3.4 AND G++ IN YOUR PATH KTHXBYE
+
 I only wrote it to easily deal with tasks from main.edu.pl platform
 
 I think it doesn't care about stderr but if it does why would it matter
