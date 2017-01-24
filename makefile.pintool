@@ -1,0 +1,10 @@
+CONFIG_ROOT := $(PIN_ROOT)/source/tools/Config
+include $(CONFIG_ROOT)/makefile.config
+
+pin-inscount$(OBJ_SUFFIX): pin-inscount.cpp
+	$(CXX) $(TOOL_CXXFLAGS_NOOPT) $(COMP_OBJ)$@ $<
+
+pin-inscount$(PINTOOL_SUFFIX): pin-inscount$(OBJ_SUFFIX)
+	$(LINKER) $(TOOL_LDFLAGS_NOOPT) $(LINK_EXE)$@ $< $(TOOL_LPATHS) $(TOOL_LIBS)
+
+include $(TOOLS_ROOT)/Config/makefile.default.rules

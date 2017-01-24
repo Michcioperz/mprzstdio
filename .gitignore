@@ -1,1 +1,7 @@
 .qtest.out
+pin-inscount.o
+pin-inscount.so
+pin.log
+.pintester.log
+Digraph.gv
+Digraph.gv.svg
