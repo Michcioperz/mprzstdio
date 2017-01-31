@@ -13,6 +13,9 @@ def task(t = nil)
     return $_task
   else
     $_task = t
+    if $_task.is_a? Symbol then
+      $_task = $_task.to_s
+    end
     ENV['TASK'] = $_task
   end
 end
@@ -53,3 +56,13 @@ def test(*names)
     system("vim #{File.join("#{$_task}", "#{ref}.in")} #{File.join("#{$_task}", "#{ref}.out")}")
   end
 end
+
+IRB.conf[:PROMPT][:MPRZSH] = {
+  :AUTO_INDENT => true,
+  :PROMPT_I => "mprzsh  $ ",
+  :PROMPT_S => "mprzsh  %l ",
+  :PROMPT_C => "mprzsh  * ",
+  :RETURN =>   "       => %s\n"
+}
+
+IRB.conf[:PROMPT_MODE] = :MPRZSH
