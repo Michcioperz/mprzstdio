@@ -28,7 +28,7 @@ def count(x):
     results[x] = results.get(x, 0) + 1
     return x
 
-for i in sorted([x for x in os.listdir(args.directory) if x.endswith(".in")], key=lambda x: ("ocen" not in x, int(re.findall(r"\d+",x)[0]))):
+for i in sorted([x for x in os.listdir(args.directory) if x.endswith(".in")], key=lambda x: ("ocen" not in x, int((re.findall(r"\d+",x)+[0])[0]))):
     with open(os.path.join(args.directory, i)) as f, open(os.path.join(args.directory, i[:-2]+"out")) as g:
         if args.verbose or args.special and i in args.special: print("Now we'll debug %s" % i)
         print(i+" "+str(count(subprocess.check_output(['pin', '-t', 'pin-inscount.so', '--', './.qtest.out'] if args.pin else ["./.qtest.out"], universal_newlines=True, stderr=(None if args.verbose or args.special and i in args.special else subprocess.DEVNULL), input=f.read()).strip() == g.read().strip())))
