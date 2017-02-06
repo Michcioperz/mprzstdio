@@ -18,7 +18,7 @@ if args.pin:
     pin_root = os.path.dirname(shutil.which('pin'))
     subprocess.check_call(['make', '-f', 'makefile.pintool', 'pin-inscount.so', 'PIN_ROOT={}'.format(pin_root)])
 
-cxx_args = ["g++",'-W','-Wall','-Wshadow','-g','-std=c++11','-o','./.qtest.out',os.path.join(args.directory,args.directory+".cpp")]
+cxx_args = ["g++",'-lm','-W','-Wall','-Wshadow','-g','-std=c++11','-o','./.qtest.out',os.path.join(args.directory,args.directory+".cpp")]
 if args.profiling:
     cxx_args.append('-pg')
 subprocess.check_call(cxx_args)

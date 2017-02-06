@@ -26,6 +26,7 @@ def check(options = "")
   end
   check_cmd = "python qtest.py #{$_task}" + " " + options
   system(check_cmd)
+  return
 end
 
 def edit
@@ -35,7 +36,22 @@ def edit
   if not Dir.exists? $_task then
     Dir.mkdir $_task
   end
-  system("vim #{File.join("#{$_task}", "#{$_task}.cpp")}")
+  filename = File.join("#{$_task}", "#{$_task}.cpp")
+  begin
+    File.open(filename, File::WRONLY|File::CREAT|File::EXCL) do |file|
+      file.write([
+          "#include <iostream>",
+          "",
+          "int main() {",
+          "	std::ios_base::sync_with_stdio(false);",
+          "	std::cin.tie(NULL);",
+          "	",
+          "}"
+        ].join("\n") + "\n")
+    end
+  rescue Errno::EEXIST
+  end
+  system("vim #{filename}")
 end
 
 def tests
